@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8efec">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Семь маленьких шагов к большому чувству. Особенный день для Алины.">
+  <title>7 шагов навстречу · Только для Алины ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="7 шагов навстречу, главная страница"><span class="wordmark-symbol">♡</span> семь шагов <span class="wordmark-light">навстречу</span></a>
+    <button type="button" class="help-link" id="openHelp">Как это работает <span aria-hidden="true">↗</span></button>
+  </header>
+
+  <main class="shell">
+    <aside class="story" aria-label="Украшение квеста">
+      <div class="story-top"><span class="pill-dot"></span> Одна история. Семь маленьких чудес.</div>
+      <div class="story-illustration" aria-hidden="true">
+        <span class="story-sun"></span>
+        <svg class="landscape" viewBox="0 0 540 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 261C80 236 120 260 192 244C289 222 347 249 535 214" stroke="#D8A5A8" stroke-width="2"/>
+          <path d="M-5 289C94 275 118 304 210 273C290 249 383 263 546 251" stroke="#D8A5A8" stroke-width="1.7"/>
+          <path d="M-2 321C93 310 152 331 242 303C322 278 430 313 544 286" stroke="#D8A5A8" stroke-width="1.2"/>
+          <path d="M-1 351C91 335 145 355 224 340C322 321 407 345 541 329" stroke="#D8A5A8" stroke-width="1.1"/>
+          <path d="M86 253V161M85 203C61 201 48 183 49 169M87 185C114 174 119 161 122 148" stroke="#A67674" stroke-width="3" stroke-linecap="round"/>
+          <path d="M86 113C100 94 132 98 141 122C157 117 182 132 172 152C192 175 162 198 144 188C137 213 97 221 87 195C54 222 19 185 40 160C13 142 43 109 65 118C66 98 83 99 86 113Z" fill="#ACBCA2" opacity=".7"/>
+          <path d="M444 220V132M444 181C427 181 416 166 416 150M445 160C461 149 464 137 468 123" stroke="#A67674" stroke-width="3" stroke-linecap="round"/>
+          <path d="M448 95C459 82 482 87 485 103C510 103 520 119 509 134C530 155 504 176 485 171C477 194 445 194 439 174C417 183 396 165 403 143C389 121 410 101 428 107C427 94 443 86 448 95Z" fill="#ACBCA2" opacity=".55"/>
+          <path d="M249 214C249 202 258 190 271 190C282 190 287 197 292 202C298 195 304 190 315 190C328 190 337 202 337 214C337 235 293 262 293 262C293 262 249 235 249 214Z" fill="#B66D7D"/>
+          <path d="M278 199C267 197 259 206 259 216" stroke="#F8E6E2" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="156" cy="70" r="4" fill="#D2A6A7"/><circle cx="365" cy="105" r="3" fill="#D2A6A7"/>
+          <path d="M365 66V82M357 74H373M186 89V105M178 97H194" stroke="#C78C92" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="floating-heart heart-a">♡</span>
+        <span class="floating-heart heart-b">✦</span>
+      </div>
+      <div class="story-copy">
+        <span class="overline">для одной особенной девушки</span>
+        <h1>Семь шагов.<br><em>Одно большое</em><br>чувство.</h1>
+        <p>Некоторые истории хочется не просто рассказывать. Их хочется проживать вместе.</p>
+      </div>
+      <div class="story-bottom"><span class="story-monogram">А <span>♡</span> А</span><span>Краснодар · с любовью</span></div>
+    </aside>
+
+    <section class="quest-card" aria-label="Романтический квест">
+      <div id="app" aria-live="polite"><p class="loading-message">Открываем твою историю…</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>Создано с любовью, специально для тебя <span aria-hidden="true">♡</span></span><span>7 шагов навстречу · 2026</span></footer>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
+    <div class="dialog-content">
+      <button type="button" class="dialog-close" id="closeHelp" aria-label="Закрыть справку">×</button>
+      <span class="overline">маленькая подсказка</span>
+      <h2 id="helpTitle">Как устроено приключение?</h2>
+      <p>Тебе будут открываться задания — строго по одному. После выполнения выбери фотографию и отправь её через специальную форму.</p>
+      <p>Фото попадёт Артёму на почту через сервис FormSubmit. После отправки сайт вернёт тебя к секретному посланию и откроет следующий этап.</p>
+      <p>Если случайно закроешь страницу, просто снова открой ссылку: прогресс останется на этом устройстве. Фотографии сам сайт не сохраняет.</p>
+      <button type="button" class="button button-primary button-full" id="gotIt">Всё понятно ♡</button>
+    </div>
+  </dialog>
+</body>
+</html>
