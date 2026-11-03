@@ -87,7 +87,7 @@
     const n = progress.current, c=chapters[n];
     const map = c.map ? `<a class="place-link" href="${escapeHtml(c.map)}" target="_blank" rel="noopener noreferrer">Открыть карту ↗</a>` : '';
     const pending=progress.pending && progress.pending.step===n ? '<div class="status status-info">Если ты уже отправляла фотографию, но письмо не открылось, проверь завершение отправки и при необходимости повтори попытку. Задание осталось на месте.</div>' : '';
-    const controls = isDemo ? `<button class="button button-primary button-full" id="fakeSubmit">Демо: открыть послание ♡</button><p class="privacy-note">В демо-режиме фото не требуется, ничего никуда не отправляется.</p>` : `<form class="file-form" id="uploadForm" method="POST" enctype="multipart/form-data" action="https://formsubmit.co/${escapeHtml(recipient)}"><input type="hidden" name="_subject" id="mailSubject" value="7 шагов навстречу"><input type="hidden" name="_next" id="returnUrl"><input type="hidden" name="_captcha" value="${cfg.disableCaptcha===false?'true':'false'}"><input type="hidden" name="_template" value="table"><input type="hidden" name="Имя" value="Алина"><input type="hidden" name="Задание" value="${n+1} из 7 — ${escapeHtml(c.title)}"><input type="hidden" name="Место" value="${escapeHtml(c.place)}"><input type="hidden" name="Дата_время" id="sentTime"><input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0"><div class="file-choice"><input class="file-input" id="photoInput" type="file" name="attachment" accept="image/*" required><label class="drop-zone" id="photoZone" for="photoInput"><span class="camera-symbol" aria-hidden="true">📷</span><b>Нажми, чтобы выбрать фотографию</b><small>Можно сделать снимок или взять из галереи</small></label></div><div class="preview" id="preview"><img id="previewImage" alt="Предпросмотр выбранного фото"><div class="preview-details"><b id="previewName"></b><span id="previewSize"></span></div><button type="button" class="preview-remove" id="removePhoto" aria-label="Убрать выбранное фото">Убрать</button></div><div class="submit-actions"><button class="button button-primary button-full" id="submitPhoto" type="submit" disabled>Отправить фото и открыть письмо <span aria-hidden="true">♡</span></button></div><div id="uploadStatus" role="status"></div><p class="privacy-note">Фото отправится на почту Артёма через FormSubmit. Сайт не хранит снимки; здесь сохраняется только прогресс. Из-за отправки страница ненадолго откроет сервис и вернётся обратно.</p></form>`;
+    const controls = isDemo ? `<button class="button button-primary button-full" id="fakeSubmit">Демо: открыть послание ♡</button><p class="privacy-note">В демо-режиме фото не требуется, ничего никуда не отправляется.</p>` : `<form class="file-form" id="uploadForm" method="POST" enctype="multipart/form-data" target="_blank" action="https://formsubmit.co/${escapeHtml(recipient)}"><input type="hidden" name="_subject" id="mailSubject" value="7 шагов навстречу"><input type="hidden" name="_next" id="returnUrl"><input type="hidden" name="_captcha" value="${cfg.disableCaptcha===false?'true':'false'}"><input type="hidden" name="_template" value="table"><input type="hidden" name="Имя" value="Алина"><input type="hidden" name="Задание" value="${n+1} из 7 — ${escapeHtml(c.title)}"><input type="hidden" name="Место" value="${escapeHtml(c.place)}"><input type="hidden" name="Дата_время" id="sentTime"><input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0"><div class="file-choice"><input class="file-input" id="photoInput" type="file" name="attachment" accept="image/*" required><label class="drop-zone" id="photoZone" for="photoInput"><span class="camera-symbol" aria-hidden="true">📷</span><b>Нажми, чтобы выбрать фотографию</b><small>Можно сделать снимок или взять из галереи</small></label></div><div class="preview" id="preview"><img id="previewImage" alt="Предпросмотр выбранного фото"><div class="preview-details"><b id="previewName"></b><span id="previewSize"></span></div><button type="button" class="preview-remove" id="removePhoto" aria-label="Убрать выбранное фото">Убрать</button></div><div class="submit-actions"><button class="button button-primary button-full" id="submitPhoto" type="submit" disabled>Отправить фото и открыть письмо <span aria-hidden="true">♡</span></button></div><div id="uploadStatus" role="status"></div><div id="uploadRecovery" class="upload-recovery" hidden><p>Если сайт отправки показал ошибку или письмо не открылось, отправь выбранное фото Артёму в обычном сообщении. После этого можно продолжить квест.</p><button type="button" class="button-ghost" id="backupContinue">Я отправила фото Артёму другим способом →</button></div><p class="privacy-note">Фото передаётся через FormSubmit. Для отправки откроется отдельная вкладка; после успешного перехода обратно ты увидишь письмо. Эта вкладка с квестом останется открытой.</p></form>`;
     app.innerHTML = `<div class="quest-content">${demoBanner()}${displayProgress()}<span class="chapter-no">Глава ${String(n+1).padStart(2,'0')} · ${escapeHtml(c.theme)}</span><div class="chapter-icon" aria-hidden="true">${c.icon}</div><h2 class="quest-title">${escapeHtml(c.title)}</h2><div class="chapter-description">Приключение продолжается. У тебя всё получится, маленькая ♡</div><div class="chapter-place"><span class="place-icon" aria-hidden="true">📍</span><div class="place-main"><strong>${escapeHtml(c.place)}</strong><small>${escapeHtml(c.hint)} · <span class="time-chip">${escapeHtml(c.time)}</span></small></div>${map}</div><div class="mini-heading">Твоё задание</div><div class="task-copy">${withParagraphs(c.task)}</div><div class="photo-task"><strong>Какую фотографию сделать</strong>${escapeHtml(c.photo)}</div>${c.fallback?`<div class="fallback-note">✨ ${escapeHtml(c.fallback)}</div>`:''}${pending}${controls}</div>`;
     if(isDemo){ document.getElementById('fakeSubmit').addEventListener('click',()=>{progress.done=Array.from(new Set([...progress.done,n])).sort((a,b)=>a-b);progress.phase='letter';writeProgress();render();}); }
     else setupPhotoForm(n,c);
@@ -132,8 +132,8 @@
     const el=document.getElementById('uploadStatus'); if(!el) return;
     el.innerHTML=`<div class="status status-${kind}">${escapeHtml(message)}</div>`;
   }
-  function clearPreview() {
-    const input=document.getElementById('photoInput'); if(input) input.value='';
+  function clearPreview(resetInput=true) {
+    const input=document.getElementById('photoInput'); if(input && resetInput) input.value='';
     currentFile=null;
     if(previewUrl){URL.revokeObjectURL(previewUrl);previewUrl=null;}
     document.getElementById('preview')?.classList.remove('visible');
@@ -144,7 +144,7 @@
     const form=document.getElementById('uploadForm'),input=document.getElementById('photoInput');
     const btn=document.getElementById('submitPhoto');
     input.addEventListener('change',async()=>{
-      const original=input.files&&input.files[0];clearPreview();
+      const original=input.files&&input.files[0];clearPreview(false);
       if(!original)return;
       if(!original.type.startsWith('image/')){showStatus('Выбери фотографию в формате изображения.');return;}
       isPreparingPhoto=true;btn.textContent='Готовим фотографию…';
@@ -157,7 +157,10 @@
         const list=new DataTransfer();list.items.add(file);input.files=list.files;
       }catch(_){
         // If a browser disallows replacing FileList, fall back to the source photo.
-        file=original;input.value='';showStatus('Браузер не смог подготовить фотографию. Попробуй выбрать другое фото или сделать скриншот.');return;
+        // На некоторых версиях iOS нельзя программно изменить input.files.
+        // Исходный файл всё ещё выбран, поскольку clearPreview(false) его не сбросил.
+        file=original;
+        if(file.size>MAX_UPLOAD){showStatus('Это фото слишком большое. Выбери снимок поменьше или отправь скриншот.');return;}
       }
       currentFile=file;
       previewUrl=URL.createObjectURL(file);
@@ -171,23 +174,36 @@
       document.getElementById('uploadStatus').textContent='';
     });
     document.getElementById('removePhoto').addEventListener('click',clearPreview);
+    const showRecovery=()=>{
+      const panel=document.getElementById('uploadRecovery');
+      if(panel)panel.hidden=false;
+    };
+    document.getElementById('backupContinue').addEventListener('click',()=>{
+      if(!currentFile){showStatus('Для продолжения сначала выбери фотографию.');return;}
+      if(!confirm('Продолжить без подтверждения FormSubmit? Используй эту кнопку только после того, как отправишь фото Артёму другим способом.'))return;
+      progress.done=Array.from(new Set([...progress.done,n])).sort((a,b)=>a-b);
+      progress.current=n;progress.phase='letter';progress.started=true;progress.pending=null;
+      writeProgress();render();
+    });
     form.addEventListener('submit',e=>{
-      e.preventDefault();
-      if(isPreparingPhoto){showStatus('Подожди, пока фотография подготовится.','info');return;}
-      if(!currentFile || !input.files.length){showStatus('Для продолжения сначала выбери фото.');return;}
-      if(currentFile.size>MAX_UPLOAD){showStatus('Фотография слишком большая для отправки.');return;}
-      if(!recipient || !/^\S+@\S+\.\S+$/.test(recipient)){showStatus('Ошибка настройки отправки. Сообщи Артёму.');return;}
-      const ticket= typeof crypto!=='undefined' && crypto.randomUUID ? crypto.randomUUID():`${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      // Нативная отправка multipart сохраняет вложение и открывается в НОВОЙ
+      // вкладке. Важно НЕ вызывать preventDefault() при успешной проверке.
+      const reject=(msg)=>{e.preventDefault();showStatus(msg);};
+      if(isPreparingPhoto){reject('Подожди, пока фотография подготовится.');return;}
+      if(!currentFile || !input.files.length){reject('Для продолжения сначала выбери фото.');return;}
+      if(currentFile.size>MAX_UPLOAD){reject('Фотография слишком большая для отправки.');return;}
+      if(!recipient || !/^\S+@\S+\.\S+$/.test(recipient)){reject('Ошибка настройки отправки. Сообщи Артёму.');return;}
+      const ticket= typeof crypto!=='undefined' && crypto.randomUUID ? crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2);
       progress.pending={step:n,ticket};
-      if(!writeProgress()){progress.pending=null;showStatus('Браузер не разрешает сохранять прогресс. Открой страницу в обычной вкладке, не в приватном режиме.');return;}
+      if(!writeProgress()){progress.pending=null;reject('Браузер не разрешает сохранять прогресс. Открой страницу в обычной вкладке, не в приватном режиме.');return;}
       const next=new URL(location.href);next.search='';next.searchParams.set('received',String(n+1));next.searchParams.set('ticket',ticket);next.hash='';
       document.getElementById('returnUrl').value=next.href;
-      document.getElementById('mailSubject').value=`❤️ Квест Алины · фото ${n+1}/7 · ${c.title}`;
+      document.getElementById('mailSubject').value='Квест Алины — фото '+(n+1)+'/7 — '+c.title;
       document.getElementById('sentTime').value=new Date().toLocaleString('ru-RU',{timeZone:'Europe/Moscow'});
-      btn.disabled=true;btn.textContent='Передаём фотографию…';
-      // Standard multipart submission: the documented FormSubmit path for actual file attachments.
-      // Their _next redirect returns here only after the form has been handled.
-      HTMLFormElement.prototype.submit.call(form);
+      showStatus('Открываем отправку в новой вкладке. Не закрывай её, пока сервис не закончит обработку фото. Если там появилась ошибка или просьба активировать почту, сообщи Артёму.','info');
+      // Если внешняя служба не работает, квест не должен навсегда блокироваться.
+      setTimeout(()=>{if(progress.phase==='task'&&progress.pending?.ticket===ticket)showRecovery();},12000);
+      // Никакого form.submit() — браузер делает обычный POST после submit event.
     });
   }
   function handleReturn() {
@@ -221,4 +237,18 @@
     dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
   }
   handleReturn();setupHelp();render();
+  window.addEventListener('storage', e=>{
+    if(e.key!==storageKey || !e.newValue)return;
+    const saved=readProgress();
+    if(saved.current!==progress.current || saved.phase!==progress.phase || saved.done.length!==progress.done.length){
+      progress=saved;render();
+    }
+  });
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState!=='visible')return;
+    const saved=readProgress();
+    if(saved.current!==progress.current || saved.phase!==progress.phase || saved.done.length!==progress.done.length){
+      progress=saved;render();
+    }
+  });
 })();
